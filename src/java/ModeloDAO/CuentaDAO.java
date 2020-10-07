@@ -21,7 +21,7 @@ public class CuentaDAO {
     ResultSet rs;
     Cuenta c = new Cuenta();
 
-    public List<Cuenta> listarCuenta() throws Exception {
+    public List<Cuenta> listarCuenta() {
         List<Cuenta> list = new ArrayList<>();
         String sql = "select * from cuenta";
         try {
@@ -30,14 +30,31 @@ public class CuentaDAO {
             rs = ps.executeQuery();
             while (rs.next()) {
                 Cuenta cu = new Cuenta();
+                cu.setIdcuenta(rs.getInt("idcuenta"));
                 cu.setCodigo(rs.getString("codigo"));
                 cu.setNombre_cuenta(rs.getString("nombre_cuenta"));
                 list.add(cu);
             }
         } catch (Exception e) {
-            throw e;
-        } finally {
-            cn.Cerrar();
+        }
+        return list;
+    }
+
+    public List<Cuenta> filtroCuenta(String filtro) {
+        List<Cuenta> list = new ArrayList<>();
+        String sql = "Select * from cuenta where nombre_cuenta Like '%" + filtro + "%'";
+        try {
+            con = cn.getConnection();
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Cuenta cu = new Cuenta();
+                cu.setIdcuenta(rs.getInt("idcuenta"));
+                cu.setCodigo(rs.getString("codigo"));
+                cu.setNombre_cuenta(rs.getString("nombre_cuenta"));
+                list.add(cu);
+            }
+        } catch (Exception e) {
         }
         return list;
     }
@@ -99,5 +116,22 @@ public class CuentaDAO {
         } finally {
             cn.Cerrar();
         }
+    }
+
+    public Cuenta buscarCuenta(String nom) {
+        Cuenta cu = new Cuenta();
+        String sql = "select * from cuenta where nombre_cuenta='" + nom + "'";
+        try {
+            con = cn.getConnection();
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                cu.setIdcuenta(rs.getInt("idcuenta"));
+                cu.setCodigo(rs.getString("codigo"));
+                cu.setNombre_cuenta(rs.getString("nombre_cuenta"));
+            }
+        } catch (Exception e) {
+        }
+        return cu;
     }
 }

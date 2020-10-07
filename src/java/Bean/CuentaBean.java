@@ -14,26 +14,26 @@ import javax.faces.bean.RequestScoped;
 @ManagedBean
 @RequestScoped
 public class CuentaBean {
-    
+
     private Cuenta cuenta = new Cuenta();
     private List<Cuenta> lstCuenta;
-    
+
     public List<Cuenta> getLstCuenta() {
         return lstCuenta;
     }
-    
+
     public void setLstCuenta(List<Cuenta> lstCuenta) {
         this.lstCuenta = lstCuenta;
     }
-    
+
     public Cuenta getCuenta() {
         return cuenta;
     }
-    
+
     public void setCuenta(Cuenta cuenta) {
         this.cuenta = cuenta;
     }
-    
+
     public void registrarCuenta() throws Exception {
         CuentaDAO dao;
         try {
@@ -43,17 +43,17 @@ public class CuentaBean {
             throw e;
         }
     }
-    
-    public void listarCuenta() throws Exception {
+
+    public void listarCuenta() {
         CuentaDAO dao;
         try {
             dao = new CuentaDAO();
             lstCuenta = dao.listarCuenta();
+            System.out.println(lstCuenta);
         } catch (Exception e) {
-            throw e;
         }
     }
-    
+
     public void leerID(Cuenta cuen) throws Exception {
         CuentaDAO dao;
         Cuenta temp;
@@ -67,7 +67,7 @@ public class CuentaBean {
             throw e;
         }
     }
-    
+
     public void editarCuenta() throws Exception {
         CuentaDAO dao;
         try {
@@ -77,7 +77,7 @@ public class CuentaBean {
             throw e;
         }
     }
-    
+
     public void eliminarCuenta(Cuenta cuen) throws Exception {
         CuentaDAO dao;
         try {
@@ -85,6 +85,24 @@ public class CuentaBean {
             dao.eliminarCuenta(cuen);
         } catch (Exception e) {
             throw e;
+        }
+    }
+
+    public void buscarCuenta() {
+        CuentaDAO dao = new CuentaDAO();
+        try {
+            cuenta = dao.buscarCuenta(cuenta.getNombre_cuenta());
+            System.out.println(cuenta.nombre_cuenta);
+        } catch (Exception e) {
+        }
+    }
+
+    public void filtroCuenta() {
+        CuentaDAO dao = new CuentaDAO();
+        try {
+            lstCuenta = dao.filtroCuenta(cuenta.getNombre_cuenta());
+            System.out.println(lstCuenta.toString());
+        } catch (Exception e) {
         }
     }
 }

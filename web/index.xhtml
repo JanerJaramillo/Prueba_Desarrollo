@@ -15,14 +15,12 @@
     <h:body style="width: 1200px;">
         <h3 style="color: #5FBA93; padding: 20px;">Asociar Proyectos y Dependencias</h3>
 
-        <label style="padding: 0 40px; color: #5FBA93; display: inline;font-size: 20px;">Cuentas Seleccionadas</label>
-
         <!-- Cuenta -->
+        <label style="padding: 0 40px; color: #5FBA93; display: inline;font-size: 20px;">Cuentas Seleccionadas</label>
         <div class="row">
             <div class="col-sm-10">
-                <a style="padding-left:50px;">
-                    <input type="text" style="width: 300px;border-radius: 20px; border: 1px solid; border-color: dimgrey;"></input>
-                </a>
+                <p:autoComplete value="#{cuentaBean.cuenta.codigo}" completeMethod="#{cuentaBean.filtroCuenta()}" maxResults="5" />
+
                 <button style="border-radius: 25px;font-size: 12px;" class="btn btn-primary">
                     <h:link outcome="Views/Nueva_Cuenta" value="+ Agregar" style="color: white"/>
                 </button>
@@ -52,7 +50,7 @@
             <div class="col-sm-6">
                 <label style="padding: 0 40px; color: #5FBA93;font-size: 20px; display: block;">Selección de proyectos</label>
                 <a style="padding-left:50px;">
-                    <input type="text" style="width: 300px;border-radius: 20px; border: 1px solid; border-color: dimgrey;"></input>
+                    <input type="text" style="width: 300px;border-radius: 20px; border: 1px solid; border-color: dimgrey;"/>
                 </a>
                 <button style="border-radius: 25px;font-size: 12px;" class="btn btn-primary">
                     <h:link outcome="Views/Nuevo_Proyecto" value="+ Agregar" style="color: white"/>
@@ -79,7 +77,7 @@
             <div class="col-sm-6">
                 <label style="padding: 0 40px; color: #5FBA93;font-size: 20px; display: block;">Dependencias del proyectos</label>
                 <a style="padding-left:50px;">
-                    <input type="text" style="width: 300px;border-radius: 20px; border: 1px solid; border-color: dimgrey;"></input>
+                    <input type="text" style="width: 300px;border-radius: 20px; border: 1px solid; border-color: dimgrey;"/>
                 </a>
                 <button style="border-radius: 25px;font-size: 12px;" class="btn btn-primary">
                     <h:link outcome="Views/Nueva_Dependencia" value="+ Agregar" style="color: white"/>
