@@ -1,0 +1,36 @@
+create table cuenta (
+  idcuenta int primary key,
+  codigo varchar(200),
+  nombre_cuenta varchar(200)
+);
+
+create table proyecto (
+  idproyecto int primary key,
+  codigo varchar(200),
+  nombre_proyecto varchar(200)
+);
+
+create table dependencia (
+  iddependencia int primary key,
+  codigo varchar(200),
+  nombre_proyecto varchar(200)
+);
+
+create table cuenta_proyecto (
+  idcuenta_proyecto int primary key,
+  idcuenta int,
+  idproyecto int
+);
+
+create table cuenta_proyecto_dependencia (
+  id int primary key,
+  idcuenta_proyecto int,
+  iddependencia int
+);
+
+alter table cuenta_proyecto add constraint cuent_proyecto_idcuenta_fk foreign key(idcuenta) references cuenta(idcuenta);
+alter table cuenta_proyecto add constraint cuenta_proyecto_idproyecto_fk foreign key(idproyecto) references proyecto(idproyecto);
+
+alter table cuenta_proyecto_dependencia add constraint id_cuenta_proyecto_fk foreign key(idcuenta_proyecto) references cuenta_proyecto(idcuenta_proyecto);
+alter table cuenta_proyecto_dependencia add constraint id_dependencia_fk foreign key(iddependencia) references dependencia(iddependencia);
+
